@@ -4,11 +4,11 @@ Assistente di ricerca in chat (Chainlit): fai una domanda, l'app cerca sul web i
 e un LLM sintetizza una risposta citando le fonti trovate, che restano cliccabili in fondo al
 messaggio.
 
-Di serie gira interamente in locale, senza alcuna chiave API:
-
 - **Ricerca web:** [`ddgs`](https://github.com/deedy5/ddgs) (motore DuckDuckGo), nessuna
   chiave richiesta.
-- **Generazione della risposta:** [Ollama](https://ollama.com) locale (`llama3.2`).
+- **Generazione della risposta:** OpenAI (`gpt-4o-mini`) di default, per usare un modello più
+  performante di quelli locali. È comunque possibile passare a Ollama locale (vedi sotto),
+  senza alcuna chiave API.
 
 ## Come funziona
 
@@ -28,19 +28,19 @@ Di serie gira interamente in locale, senza alcuna chiave API:
 poetry install
 ```
 
-### Versione locale con Ollama (default)
+### Versione con OpenAI (default)
+
+```bash
+cp .env.example .env   # e inserisci la tua OPENAI_API_KEY
+```
+
+### Versione locale con Ollama (alternativa, nessuna chiave richiesta)
+
+In `info_segugio/config.py`, commenta il blocco OpenAI e scommenta quello Ollama, poi:
 
 ```bash
 ollama pull llama3.2
 ollama serve
-```
-
-### Versione con OpenAI (alternativa)
-
-In `info_segugio/config.py`, commenta il blocco Ollama e scommenta quello OpenAI, poi:
-
-```bash
-cp .env.example .env   # e inserisci la tua OPENAI_API_KEY
 ```
 
 ## Per eseguire l'applicazione
